@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+/*вам нужно написать реализацию функции void merge(arraylist<integer> a, arraylist<integer> b) { // тело функции }
+функция принимает два отсортированных от меньшего к большему arraylist одинакового размера [a1, a2, ..., an], [b1, b2, ..., bn].
+в результате выполнения функции в первом(!) arraylist (в данном случае это а) должны содержаться элементы обоих arraylist, также отсортированные от меньшего к большему.
+второй arraylist должен остаться неизменненным.*/
+public class func {
+
+    public static void merge(ArrayList<Integer> a, ArrayList<Integer> b) {
+        int size = a.size();
+        ArrayList<Integer> c = new ArrayList<>(size * 2);
+        int one = 0;
+        int next = 0;
+
+        if (a.size() != b.size()) {
+            System.out.println("Arrays of different sizes");
+            System.exit(0);
+        } else {
+            for (; one < size && next < size; ) {
+                if (a.get(one) < b.get(next)) {
+                    c.add(a.get(one++));
+                } else {
+                    c.add(b.get(next++));
+                }
+            }
+            while (one < a.size())
+                c.add(a.get(one++));
+            while (next < b.size())
+                c.add(b.get(next++));
+            a.clear();
+            a.addAll(c);
+
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> arr1 = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9, 10));
+        ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(2, 6, 8, 10, 12, 13));
+
+        merge(arr1, arr2);
+        System.out.println(arr1);
+        System.out.println(arr2);
+    }
+    }
+
